@@ -20,7 +20,8 @@ def ngccmGroup(rm):
     i2cGroups = [0x01, 0x10, 0x20, 0x02]
     return i2cGroups[rm-1]
 
-def openChannel(slot, bus):
+def openChannel(backplaneNumber, slot, bus):
+    #backplanenumber can be 0 or 1
     rmLoc = getReadoutSlot(slot)
     if rmLoc in [3,4]:
       # Open channel to ngCCM for RM 3,4: J1 - J10
