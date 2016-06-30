@@ -31,7 +31,7 @@ def ngccmGroup(rm):
     return i2cGroups[rm-1]
 
 class RM:
-    def __init__(self, location, activeSlots, summaries, inBus):
+    def __init__(self, backplane, location, activeSlots, summaries, inBus):
         '''Initializes an RM object at a specific location on the test stand'''
         self.qCards = []
 	self.bus = inBus
@@ -40,7 +40,7 @@ class RM:
         for i in activeSlots:
             if self.checkCards(i):
 		print summaries[getSummaryIndex(i)].idNo
-                self.qCards.append(qCard(i,summaries[getSummaryIndex(i)]))
+                self.qCards.append(qCard(backplane, i,summaries[getSummaryIndex(i)]))
 
     def __repr__(self):
         '''Object representation'''

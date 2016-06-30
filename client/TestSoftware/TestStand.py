@@ -6,10 +6,10 @@ sys.path.append('../')
 from client import webBus
 
 class TestStand:
-    def __init__(self, activeSlots, summaryList, suiteSelection, piAddress, iterations):
+    def __init__(self, backplane, activeSlots, summaryList, suiteSelection, piAddress, iterations):
         '''Create a test stand object filled with necessary RMs, cards'''
 	self.bus = webBus(piAddress, 0)
-	self.suiteSelection = suiteSelection	
+	self.suiteSelection = suiteSelection
 	self.iters = iterations
 
         self.activeSlots = activeSlots
@@ -41,10 +41,10 @@ class TestStand:
 
         #initialize RMs
 	print "--- Determining which slots contain active cards ---\n"
-        self.RMs.append(RM.RM(1, RM1_active, RM1_summaries, self.bus))
-        self.RMs.append(RM.RM(2, RM2_active, RM2_summaries, self.bus))
-        self.RMs.append(RM.RM(3, RM3_active, RM3_summaries, self.bus))
-        self.RMs.append(RM.RM(4, RM4_active, RM4_summaries, self.bus))
+        self.RMs.append(RM.RM(backplane, 1, RM1_active, RM1_summaries, self.bus))
+        self.RMs.append(RM.RM(backplane, 2, RM2_active, RM2_summaries, self.bus))
+        self.RMs.append(RM.RM(backplane, 3, RM3_active, RM3_summaries, self.bus))
+        self.RMs.append(RM.RM(backplane, 4, RM4_active, RM4_summaries, self.bus))
 	print "\n--- Slot determination finished. Beginning tests ---\n\n"
 
     def runAll(self):

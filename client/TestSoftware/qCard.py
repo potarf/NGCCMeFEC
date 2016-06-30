@@ -12,9 +12,10 @@ def getCardAddress(slot):
 	if slot in [5,10,21,26]: return cardAddresses[3]
 
 class qCard:
-    def __init__(self, slot, summary, barcode='000_000'):
+    def __init__(self, backplane, slot, summary, barcode='000_000'):
         '''Create a qCard object with basic info and no yet-passed tests'''
-        self.slot = slot
+		self.backplane = backplane
+		self.slot = slot
         self.address = getCardAddress(self.slot)
         self.barcode = barcode
         self.passed = []
@@ -36,7 +37,7 @@ class qCard:
         t = tests.testSuite(inBus, self.address, self.outCard, iters)
 	t.runTests(suiteSelection)
 
-    def runSingle(self, key,piAddress):
+    def runSingle(self, key, piAddress):
 	    t = tests.testSuite(piAddress, self.address)
 	    for result in t.runSingleTest(key):
     	        self.passed.append(result)
